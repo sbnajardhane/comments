@@ -10,10 +10,9 @@ function heavy() {
     console.log(a);
 }
 // setTimeout(function() {
-heavy();
+//heavy();
 
-$(document
-).ready(function() {
+$(document).ready(function() {
     if (Modernizr.websockets) {
         $("#result").html('Your browser has support for Web Sockets');
     } else {
