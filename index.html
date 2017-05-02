@@ -17,6 +17,12 @@
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/material-kit.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <style type="text/css">
+        .green {
+            background-color: rgba(51, 153, 81, 0.36);
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="landing-page">
@@ -26,15 +32,17 @@
         <div class="main main-raised" id="about_us">
             <div id="description" class="container">
                 <h2 class="title text-center">Let's talk product</h2>
-                <h5 class="description">This has been developed with the belief that exploration is the key any kind of self development. The venture intends to use this faculty to promote artistic growth.To further this, we organise themed group trips to different locations across the country with artists from various domains. This, we believe, creates a connection between evolving, like minded artists and helps them learn through collective experience. These artists then collaborate to create novel art, and these stories are exhibited to reach out to a larger circle.</h5>
-                <h5 class="description">This has been developed with the belief that exploration is the key any kind of self development. The venture intends to use this faculty to promote artistic growth.To further this, we organise themed group trips to different locations across the country with artists from various domains. This, we believe, creates a connection between evolving, like minded artists and helps them learn through collective experience. These artists then collaborate to create novel art, and these stories are exhibited to reach out to a larger circle.</h5>
-                <textarea name="editor1"></textarea>
+                <span>This has been developed with the belief that exploration is the key any kind of self development. The venture intends to use this faculty to promote artistic growth.To further this, we organise themed group trips to different locations across the country with artists from various domains. This, we believe, creates a connection between evolving, like minded artists and helps them learn through collective experience. These artists then collaborate to create novel art, and these stories are exhibited to reach out to a larger circle.</span>
+                <p>This has been developed with the belief that exploration is the key any kind of self development. The venture intends to use this faculty to promote artistic growth.To further this, we organise themed group trips to different locations across the country with artists from various domains. This, we believe, creates a connection between evolving, like minded artists and helps them learn through collective experience. These artists then collaborate to create novel art, and these stories are exhibited to reach out to a larger circle.</p>
+            </div>
+            <div class="container">
+            <textarea name="editor1"></textarea>
                 <script>
                 CKEDITOR.replace('editor1');
                 </script>
                 <button type="button" class="btn btn-primary btn-lg">Add Comment</button>
-            </div>
             <br>
+            </div>
         </div>
         <footer class="footer">
             <div class="container">
@@ -51,6 +59,7 @@
 <script src="./assets/js/nouislider.min.js" type="text/javascript"></script>
 <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 <script src="./assets/js/material-kit.js" type="text/javascript"></script>
+<script type="text/javascript" src="comments.js"></script>
 <script type="text/javascript">
 $("#description").select(function(e) {
     console.log(e);
