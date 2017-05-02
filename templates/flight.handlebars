@@ -1,0 +1,56 @@
+
+{{#each flights}}
+<div class="flights">
+    <div class="row name-status">
+        <div class="pull-left name">
+            {{ airlineName}} {{flightNumber}}
+        </div>
+        <div class="pull-right status">
+            {{getStatus status_text}}
+        </div>
+    </div>
+    
+    <div class="row cities">
+        <div class="pull-left source-city city">
+            {{departing.location}}
+        </div>
+        <div class="pull-right destination-city city">
+            {{arriving.location}}
+        </div>
+    </div>
+    <table class="row position">
+        <td class="pull-left source-abbr abbr">
+            {{departing.airport}}
+        </td>
+        <td class="position">
+            <div class="plane" style="left:{{planePosition}}%;margin-left:{{marginLeft}}">
+            </div>
+            <div class="path-pending path" style="left:{{normalized.progress_percent}}%">
+            </div>
+            <div class="path-completed path">
+            </div>
+        </td>
+        <td class="pull-right destination-abbr abbr">
+            {{arriving.airport}}
+        </td>
+    </table>
+    <div class="row times">
+        <div class="pull-left source-time time">
+            <span class="time">{{departing.departureTime}}<span class="comma">,</span></span>
+            <span class="date">{{departing.month}} {{departing.day}}</span>
+        </div>
+        <div class="pull-right destination-time time">
+            <span class="date">{{arriving.month}} {{arriving.day}}<span class="comma">,</span></span>
+            <span class="time">{{arriving.arrivalTime}}</span>
+        </div>
+    </div>
+    <div class="row gates">
+        <div class="pull-left source-gate gate">
+            {{{departing.terminal}}}, {{{departing.gate}}}
+        </div>
+        <div class="pull-right destination-gate gate">
+            {{{arriving.terminal}}}, {{{arriving.gate}}}
+        </div>
+    </div>
+</div>
+{{/each}}

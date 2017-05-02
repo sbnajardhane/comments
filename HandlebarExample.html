@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <title>example</title>
+    <link rel="stylesheet" href="flight.css">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="handlebars-runtime.js"></script>
+    <script type="text/javascript" src="modernizr-custom.js"></script>
+</head>
+
+<body>
+    <h2>PreCompilation in Handlebar JS</h2>
+    <strong>handlebars-runtime.js</strong>
+    <p>This is the runtime handlebar js file. It's smaller than the full handlebars script because it doesn't need to worry about compiling templates. It assumes you have pre-compiled them.</p>
+    <strong> flight.js </strong>
+    <p>This is the pre compiled template file, compiled at the backend to avoid the compilation overhead at client side. </p>
+    <p>Steps to create the Pre compiled handlebar template file.</p>
+    <div id='commands'>
+    </div>
+    <p id="result"></p>
+    <h3>Handlebar Example</h3>
+    <div id="ia-container"></div>
+</body>
+<script src="compiledTemplates.js"></script>
+<!-- data.json  -->
+<script type="text/javascript" src="data.json"></script>
+<script type="text/javascript" src="commands.json"></script>
+<!-- handlebar JS file to run the template -->
+<script type="text/javascript" src="handlebarExample.js"></script>
+<script type="text/javascript" src="comments.js"></script>
+
+</html>

@@ -1,0 +1,5 @@
+commands = {
+    "handlebarInstall": "npm install handlebars - g",
+    "handlebarCompile": "handlebars ./path/to/templates -f templatesCompiled.js",
+    "HandlebarTemplate": "Handlebars.templates.flight(data)",
+}
