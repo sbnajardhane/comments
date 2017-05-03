@@ -12,47 +12,58 @@ var evn = "shubham";
 var anchorNode;
 $(function() {
     var comments = (function() {
-        var selectionObject; // = getSelectedText();
-        var text; // = selectionObject.toString();
+        var selectionObject = getSelectedText();
+        var text = selectionObject.toString();
+        var range;
         var count = 0;
+
         //bind event on mouse up
         //function to select the text from the html desc
         //select and open dialog box
+        // var getSelectedText = function() {
+        //     console.log("inside plugin");
+        //     if (window.getSelection) {
+        //         return window.getSelection();
+        //     } else if (document.selection) {
+        //         return document.selection.createRange().text;
+        //     }
+        //     return '';
+        // }
 
-        var __createNode = function() {
+
+        var __createNode = function(selectionObject) {
+
             //create span for the selected text and changes the color
             var highlightNode = document.createElement("span");
             highlightNode.setAttribute("class", "green");
             highlightNode.setAttribute("id", count);
             // append it to HTML
             console.log(selectionObject);
-            var range = selectionObject.getRangeAt(0);
+            range = selectionObject.getRangeAt(0);
             range.surroundContents(highlightNode);
 
             //append created comment element after highlighted span
             // $(#count).after(commentNode);
-
-
             count++;
         };
 
         var selectText = function() {
+            console.log(selectionObject);
             selectionObject = getSelectedText();
             text = selectionObject.toString();
-            range = selectionObject.getRangeAt(0);
-            console.log(text);
+            console.log(selectionObject);
             if (text != '') {
                 var dialog = $("#dialog");
-                console.log(text);
+                // setTimeout(function() {
+                // console.log(text);
                 // dialog[0].setAttribute("title", text);
                 // $("#dialog").dialog('title', text);
                 dialog.dialog();
+                // }, 1000);
             }
         };
 
         //create span element
-
-
         var disabledButton = function() {
             if ($(this).val().length != 0) {
                 $('#addComment').attr('disabled', false);
@@ -69,6 +80,8 @@ $(function() {
             var comments = document.getElementById("comments");
             comments.appendChild(commentNode);
             $("#dialog").dialog('close');
+            console.log('here is the passed object to addComment');
+            console.log(selectionObject);
             __createNode();
         };
 
@@ -81,6 +94,7 @@ $(function() {
         };
 
         var bindFunctions = function() {
+            // $('#description p').mouseup({ selectionObject: selectionObject }, selectText);
             $('#description p').mouseup(selectText);
             $('#dialogComment').on('keyup', disabledButton);
             $('#addComment').on('click', addComment);
