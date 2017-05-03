@@ -1,6 +1,5 @@
 function getSelectedText() {
     if (window.getSelection) {
-
         return window.getSelection();
     } else if (document.selection) {
         return document.selection.createRange().text;
@@ -10,31 +9,82 @@ function getSelectedText() {
 var a;
 var evn = "shubham";
 var count = 0;
-$('#description span').mouseup(function(e) {
-    var selectionObject = getSelectedText();
-    var text = selectionObject.toString();
-    if (text != '') {
-        console.log("text == " + text);
-        evn = e;
-        a = selectionObject;
-        // console.log(selectionObject);
-        // console.log(event.currentTarget.innerHTML);
-        // console.log(event);
-        a = selectionObject;
-        var startIndecx = selectionObject.anchorOffset < selectionObject.focusOffset ? selectionObject.anchorOffset : selectionObject.focusOffset;
-        var endIndex = selectionObject.focusOffset > selectionObject.anchorOffset ? selectionObject.focusOffset : selectionObject.anchorOffset;
-        var description = selectionObject.focusNode.data;
-        console.log(selectionObject.anchorNode);
-        var array = [];
-        array[0] = description.slice(0, startIndecx);
-        array[1] = description.slice(endIndex);
-        console.log(startIndecx + " endIndex" + endIndex);
-        // console.log(array);
-        count++;
-        var remaining = e.target.innerHTML;
-        console.log(remaining);
-        var remainingLength = selectionObject.anchorNode.length;
-        remaining = remaining.slice(0, -remainingLength);
-        e.target.innerHTML = remaining + array[0] + '<span class="green" id="' + count + '">' + text + '</span>' + array[1];
-    }
+var anchorNode;
+$(function() {
+    $('#description p').mouseup(function(e) {
+        var selectionObject = getSelectedText();
+        var text = selectionObject.toString();
+        console.log(text);
+        if (text != '') {
+
+            //open modal
+            //
+
+            var dialog = $("#dialog");
+
+            dialog[0].setAttribute("title", text);
+            dialog.dialog();
+            dialog[0].setAttribute("title", "");
+
+            //
+
+            //create comment element p
+            //
+            $('#dialogComment').on('click', function() {
+                var commentNode = document.createElement("p");
+                commentNode.innerText = $("#dialogComment").val(); //"this is comment regarding to the id " + count; //get the content here from input box
+                commentNode.setAttribute("class", "hidden");
+                commentNode.setAttribute("id", count + "desc");
+            });
+            //click on add comment button
+            //
+
+
+
+            //create span for the selected text and changes the color
+            evn = e;
+            a = selectionObject;
+            var highlightNode = document.createElement("span");
+            highlightNode.setAttribute("class", "green");
+            highlightNode.setAttribute("id", count);
+
+            // append it to HTML
+            var range = selectionObject.getRangeAt(0);
+            range.surroundContents(highlightNode);
+
+            //append created comment element after highlighted span
+            // $(#count).after(commentNode);
+
+
+            count++;
+        }
+    });
+
+    $("#description").click(function(event) {
+        target = event.target;
+
+        // console.log(event.target.nodeName);
+        if (target.nodeName === "SPAN") {
+            var id = target.attributes.id.value;
+            console.log(target.attributes.id);
+            // id = parseInt(id);
+            // id = id + id;
+
+            //create comment box
+
+            console.log(target);
+            target.after(commentNode);
+
+        }
+
+    });
+
+    $('#dialogComment').keyup(function() {
+        if ($(this).val().length != 0) {
+            $('#addComment').attr('disabled', false);
+        } else {
+            $('#addComment').attr('disabled', true);
+        }
+    })
+
 });

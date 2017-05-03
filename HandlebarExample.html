@@ -7,16 +7,43 @@
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="handlebars-runtime.js"></script>
     <script type="text/javascript" src="modernizr-custom.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style type="text/css">
+    .green {
+        background-color: rgba(51, 153, 81, 0.36);
+        cursor: pointer;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    </style>
 </head>
 
 <body>
+    <!-- <div>
+    <iframe class="hidden" id="firstiFrame" src="http://localhost/handlebar_example/index.html">
+        <p>Your browser does not support iframes.</p>
+    </iframe>
+</div>
+<div>-->
+    <!-- <iframe class="hidden" id="secondiFrame" src="http://localhost/handlebar_example/HandlebarExample.html"> -->
+    <!-- <iframe class="hidden" id="secondiFrame" src="http://heera.it">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+</div>
+ -->
     <h2>PreCompilation in Handlebar JS</h2>
     <strong>handlebars-runtime.js</strong>
     <p>This is the runtime handlebar js file. It's smaller than the full handlebars script because it doesn't need to worry about compiling templates. It assumes you have pre-compiled them.</p>
     <strong> flight.js </strong>
     <p>This is the pre compiled template file, compiled at the backend to avoid the compilation overhead at client side. </p>
     <p>Steps to create the Pre compiled handlebar template file.</p>
-    <div id='commands'>
+    <div id="dialog" title="adf">
+        <input type="text" id="dialogComment">
+        <button id="addComment" value="addComment" disabled="true">add Comment</button>
+    </div>
+    <div id='description'>
     </div>
     <p id="result"></p>
     <h3>Handlebar Example</h3>
@@ -29,5 +56,7 @@
 <!-- handlebar JS file to run the template -->
 <script type="text/javascript" src="handlebarExample.js"></script>
 <script type="text/javascript" src="comments.js"></script>
+<script type="text/javascript" src="executation.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </html>

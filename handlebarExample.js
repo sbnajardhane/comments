@@ -15,6 +15,6 @@ document.getElementById('ia-container').innerHTML = templateScript;
 
 // setTimeout(function() {
 var commandHtml = Handlebars.templates.commands(commands);
-document.getElementById('commands').innerHTML = commandHtml;
+document.getElementById('description').innerHTML = commandHtml;
 // console.log('ready to show commands panel');
 // }, 0);

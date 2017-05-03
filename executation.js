@@ -20,3 +20,15 @@ $(document).ready(function() {
     }
 });
 // }, 0);
+
+$(function() {
+    $('#firstiFrame').on('load', function() {
+        $(this).show();
+        console.log('laod the first iframe');
+
+    });
+    $('#secondiFrame').on('load', function() {
+        $(this).show();
+        console.log('load the second iFrame');
+    });
+});
