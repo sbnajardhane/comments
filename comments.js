@@ -10,7 +10,7 @@ var a;
 var evn = "shubham";
 
 var anchorNode;
-$(function() {
+$(document).ready(function() {
     var comments = (function() {
         var selectionObject; // = getSelectedText();
         var text; // = selectionObject.toString();
@@ -67,8 +67,9 @@ $(function() {
             var commentNode = document.createElement("p");
             commentNode.innerText = $("#dialogComment").val();
             commentNode.setAttribute("id", "comment_" + count);
-            var comments = document.getElementById("comments");
             comments.appendChild(commentNode);
+            var comments = document.getElementById("comments");
+            $('#comments_' + count).css({ 'top': mouseY, 'left': mouseX }).fadeIn('slow');
             $("#dialog").modal('toggle');
             console.log(selectionObject);
             count++;
