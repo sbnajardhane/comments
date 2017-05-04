@@ -12,24 +12,11 @@ var evn = "shubham";
 var anchorNode;
 $(function() {
     var comments = (function() {
-        var selectionObject = getSelectedText();
-        var text = selectionObject.toString();
+        var selectionObject; // = getSelectedText();
+        var text; // = selectionObject.toString();
         var range;
         var count = 0;
-
-        //bind event on mouse up
-        //function to select the text from the html desc
-        //select and open dialog box
-        // var getSelectedText = function() {
-        //     console.log("inside plugin");
-        //     if (window.getSelection) {
-        //         return window.getSelection();
-        //     } else if (document.selection) {
-        //         return document.selection.createRange().text;
-        //     }
-        //     return '';
-        // }
-
+        bootstrap_alert = function() {}
 
         var __createNode = function(selectionObject) {
 
@@ -39,31 +26,34 @@ $(function() {
             highlightNode.setAttribute("id", count);
             // append it to HTML
             console.log(selectionObject);
-            range = selectionObject.getRangeAt(0);
+            //range = selectionObject.getRangeAt(0);
             range.surroundContents(highlightNode);
 
             //append created comment element after highlighted span
             // $(#count).after(commentNode);
-            count++;
         };
 
         var selectText = function() {
             console.log(selectionObject);
             selectionObject = getSelectedText();
+            anchorNode = selectionObject;
             text = selectionObject.toString();
+            range = selectionObject.getRangeAt(0);
             console.log(selectionObject);
             if (text != '') {
                 var dialog = $("#dialog");
-                // setTimeout(function() {
-                // console.log(text);
-                // dialog[0].setAttribute("title", text);
-                // $("#dialog").dialog('title', text);
-                dialog.dialog();
-                // }, 1000);
+                setTimeout(function() {
+                    // var dialog = $("#dialog").show();
+                    // dialog[0].setAttribute("title", text);
+                    // $("#dialog").dialog('title', text);
+                    dialog.modal('show');
+                }, 0);
+                __createNode();
             }
         };
 
-        //create span element
+        //enable diseable button
+        //todo : pass button id 
         var disabledButton = function() {
             if ($(this).val().length != 0) {
                 $('#addComment').attr('disabled', false);
@@ -75,30 +65,40 @@ $(function() {
         var addComment = function() {
             console.log('click event');
             var commentNode = document.createElement("p");
-            commentNode.innerText = $("#dialogComment").val(); //"this is comment regarding to the id " + count; //get the content here from input box
+            commentNode.innerText = $("#dialogComment").val();
             commentNode.setAttribute("id", "comment_" + count);
             var comments = document.getElementById("comments");
             comments.appendChild(commentNode);
-            $("#dialog").dialog('close');
-            console.log('here is the passed object to addComment');
+            $("#dialog").modal('toggle');
             console.log(selectionObject);
-            __createNode();
+            count++;
         };
 
         var viewComment = function() {
             target = event.target;
             if (target.nodeName === "SPAN") {
                 var id = target.attributes.id.value;
-                target.after(commentNode);
+                // target.after(commentNode);
+                console.log(id);
+                console.log($("#comment_" + id).text());
+                var comment = $("#comment_" + id).text();
+                bootstrap_alert.warning(comment);
+                // __showPopup(comment);
             }
         };
 
+        // var __showPopup = function(comment) {
+        bootstrap_alert.warning = function(message) {
+                console.log("called");
+                $('<div id="floating_alert" class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '&nbsp;&nbsp;</div>').appendTo('body');
+            }
+            // }
         var bindFunctions = function() {
             // $('#description p').mouseup({ selectionObject: selectionObject }, selectText);
             $('#description p').mouseup(selectText);
             $('#dialogComment').on('keyup', disabledButton);
             $('#addComment').on('click', addComment);
-            $("#description").click(function(event) {});
+            $("#description").on('click', viewComment);
         };
 
         var init = function() {
