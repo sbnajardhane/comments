@@ -22,27 +22,7 @@
 </head>
 
 <body>
-    <!-- <div>
-    <iframe class="hidden" id="firstiFrame" src="http://localhost/handlebar_example/index.html">
-        <p>Your browser does not support iframes.</p>
-    </iframe>
-</div>
-<div>-->
-    <!-- <iframe class="hidden" id="secondiFrame" src="http://localhost/handlebar_example/HandlebarExample.html"> -->
-    <!-- <iframe class="hidden" id="secondiFrame" src="http://heera.it">
-    <p>Your browser does not support iframes.</p>
-</iframe>
-</div>
- -->
-    <h2>PreCompilation in Handlebar JS</h2>
-    <strong>handlebars-runtime.js</strong>
-    <p>This is the runtime handlebar js file. It's smaller than the full handlebars script because it doesn't need to worry about compiling templates. It assumes you have pre-compiled them.</p>
-    <strong> flight.js </strong>
-    <p>This is the pre compiled template file, compiled at the backend to avoid the compilation overhead at client side. </p>
-    <p>Steps to create the Pre compiled handlebar template file.</p>
-    <div id='commands'>
-    </div>
-    <div id='description'>
+    <div id="description">
     </div>
     <div id="comments" class="hidden">
     </div>
@@ -71,19 +51,14 @@
         <button type="button" id="close_floating_alert" class="close" aria-hidden="true">x</button>
         <p></p>
     </div>
-    </div <p id="result"></p>
-    <h3>Handlebar Example</h3>
-    <div id="ia-container"></div>
+    </div>
 </body>
 <script src="compiledTemplates.js"></script>
 <script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- data.json  -->
-<script type="text/javascript" src="data.json"></script>
-<script type="text/javascript" src="commands.json"></script>
 <!-- handlebar JS file to run the template -->
 <script type="text/javascript" src="handlebarExample.js"></script>
 <script type="text/javascript" src="comments.js"></script>
 <script type="text/javascript" src="executation.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </html>

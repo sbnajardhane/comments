@@ -14,43 +14,63 @@ $(document).ready(function() {
 
         var text; // = selectionObject.toString();
         var range;
-        var count = 0;
+        var count = $("#comments p").length;
         bootstrap_alert = function() {}
 
         var __createNode = function(selectionObject) {
-
             //create span for the selected text and changes the color
             var highlightNode = document.createElement("span");
             highlightNode.setAttribute("class", "green");
             highlightNode.setAttribute("id", count);
-            // append it to HTML
-            // console.log(selectionObject);
-            //range = selectionObject.getRangeAt(0);
             range.surroundContents(highlightNode);
-
-            //append created comment element after highlighted span
-            // $(#count).after(commentNode);
         };
 
         var __saveChanges = function(event) {
-            console.log($(event.target).index('p'));
-            console.log($(this));
-        }
+
+            var index = $(event.target).index();
+            index = parseInt(index);
+            var text = $("#description p")[index].innerHTML;
+            text = text.trim();
+
+            url = 'cgi-bin/update_json.py';
+            data = {
+                'index': index,
+                'text': text
+            };
+
+            __sendData(data, url);
+        };
+
+        var __saveComments = function(comment) {
+            console.log(count);
+            url = 'cgi-bin/update_comment.py';
+            data = {
+                'index': count,
+                'text': comment
+            }
+            __sendData(data, url);
+        };
+
+        var __sendData = function(data, url) {
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: data,
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        };
 
         var selectText = function(event) {
-            // console.log(selectionObject);
             selectionObject = getSelectedText();
             anchorNode = selectionObject;
             text = selectionObject.toString();
             range = selectionObject.getRangeAt(0);
-            // console.log(selectionObject);
             if (text != '') {
                 var dialog = $("#dialog");
                 if (!getCommentId(event)) {
                     setTimeout(function() {
-                        // var dialog = $("#dialog").show();
-                        // dialog[0].setAttribute("title", text);
-                        // $("#dialog").dialog('title', text);
                         dialog.modal('show');
                     }, 0);
 
@@ -73,24 +93,20 @@ $(document).ready(function() {
         };
 
         var addComment = function() {
-            // console.log('click event');
             var commentNode = document.createElement("p");
             commentNode.innerText = $("#dialogComment").val();
             commentNode.setAttribute("id", "comment_" + count);
-            // var comments = document.getElementById("comments");
             var comments = $("#comments");
             comments.append(commentNode);
+            console.log(commentNode.outerHTML);
             $("#dialog").modal('toggle');
-            // console.log(selectionObject);
+            __saveComments(commentNode.outerHTML);
             count++;
         };
 
         var viewComment = function(event) {
-            // console.log(event);
             var id = getCommentId(event);
             if (id) {
-                // console.log(id);
-                // console.log($("#comment_" + id).text());
                 var comment = $("#comment_" + id).text();
                 bootstrap_alert.warning(comment);
                 var whichOffset = getAlertBoxPosition(event);
@@ -102,7 +118,6 @@ $(document).ready(function() {
                     "max-width": "500px"
                 });
                 if (whichOffset === "left") {
-                    // console.log("left offset value is assigned");
                     var left = event.pageX;
                     if ((left - (floating_alert.width() / 2)) > 0) {
                         left = left - floating_alert.width() / 2;
@@ -114,7 +129,6 @@ $(document).ready(function() {
                         right: ""
                     });
                 } else {
-                    // console.log("right offset value is assigned");
                     var right = $(window).width() - event.pageX;
                     if (right - floating_alert.width() / 2 > 0) {
                         right = right - floating_alert.width() / 2;
@@ -126,7 +140,6 @@ $(document).ready(function() {
                         left: ""
                     });
                 }
-                // __showPopup(comment);
             }
         };
 
@@ -136,10 +149,9 @@ $(document).ready(function() {
             if (target.nodeName === "SPAN") {
                 var id = target.attributes.id.value;
             }
-            // console.log("get comment id");
-            // console.log(id);
+
             return id;
-        }
+        };
 
         var getAlertBoxPosition = function(event) {
             var windowWidth = $(window).width();
@@ -150,22 +162,19 @@ $(document).ready(function() {
                 whichOffset = "right";
             }
             return whichOffset;
-        }
+        };
+
         var closeAlert = function() {
-            // console.log("ca;;ed");
             $("#floating_alert").hide();
-        }
+        };
 
         bootstrap_alert.warning = function(message) {
-                // console.log("called");
-                var alertBox = $("#floating_alert");
-                alertBox.find("p")[0].innerText = message;
-                alertBox.show();
-                // $('#floating_alert').css({ 'top': mouseY, 'left': mouseX }).fadeIn('slow');
-            }
-            // }
+            var alertBox = $("#floating_alert");
+            alertBox.find("p")[0].innerText = message;
+            alertBox.show();
+        };
+
         var bindFunctions = function() {
-            // $('#description p').mouseup({ selectionObject: selectionObject }, selectText);
             $('#description p').mouseup(selectText);
             $('#dialogComment').on('keyup', disabledButton);
             $('#addComment').on('click', addComment);
