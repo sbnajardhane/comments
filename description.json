@@ -1,0 +1,7 @@
+description = {
+    "array": [
+        "<p>This is first paragraph</p>",
+        "<p>This is second paragraph</p>",
+        "<p>This is third paragraph</p>"
+    ]
+}
