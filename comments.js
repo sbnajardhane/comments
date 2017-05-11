@@ -93,16 +93,27 @@ $(document).ready(function() {
         };
 
         var addComment = function() {
-            var commentNode = document.createElement("p");
-            commentNode.innerText = $("#dialogComment").val();
+            var commentNode = document.createElement("div");
+            // commentNode.innerHTML = CKEDITOR.instances.dialogComment.getData();
+            commentNode.innerHTML = $("#dialogComment").val();
             commentNode.setAttribute("id", "comment_" + count);
             var comments = $("#comments");
             comments.append(commentNode);
             console.log(commentNode.outerHTML);
             $("#dialog").modal('toggle');
+            __sendData(data, url);
             __saveComments(commentNode.outerHTML);
             count++;
         };
+
+        var revertSelection = function() {
+            var node = $("#" + count)[0];
+            var comment = $("#comment_" + count);
+            // if (!comment.text() == "") {
+            node.outerHTML = node.innerHTML;
+            console.log('modal closed event');
+            // }
+        }
 
         var viewComment = function(event) {
             var id = getCommentId(event);
@@ -175,11 +186,13 @@ $(document).ready(function() {
         };
 
         var bindFunctions = function() {
-            $('#description p').mouseup(selectText);
+            $('#description').on('mouseup', selectText);
             $('#dialogComment').on('keyup', disabledButton);
             $('#addComment').on('click', addComment);
             $("#description").on('click', viewComment);
             $('#close_floating_alert').on('click', closeAlert);
+            $('#modalCross').on('click', revertSelection);
+            $('#modalClose').on('click', revertSelection);
         };
 
         var init = function() {

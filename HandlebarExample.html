@@ -3,7 +3,6 @@
 
 <head>
     <title>example</title>
-    <link rel="stylesheet" href="flight.css">
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="handlebars-runtime.js"></script>
     <script type="text/javascript" src="modernizr-custom.js"></script>
@@ -19,6 +18,7 @@
         display: none;
     }
     </style>
+    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -32,16 +32,20 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" id="modalCross" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="dialogComment">
+                    <!-- <textarea class="form-control" id="dialogComment" name="editor1"></textarea> -->
+                    <script>
+                    // CKEDITOR.replace('editor1');
+                    </script>
+                    <textarea type="text" class="form-control" id="dialogComment"></textarea>
                     <!-- <p>Some text in the modal.</p> -->
                 </div>
                 <div class="modal-footer">
                     <button id="addComment" class="btn btn-default" data-dismiss="modal" value="addComment">add Comment</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalClose">Close</button>
                 </div>
             </div>
         </div>
@@ -59,6 +63,5 @@
 <!-- handlebar JS file to run the template -->
 <script type="text/javascript" src="handlebarExample.js"></script>
 <script type="text/javascript" src="comments.js"></script>
-<script type="text/javascript" src="executation.js"></script>
 
 </html>
